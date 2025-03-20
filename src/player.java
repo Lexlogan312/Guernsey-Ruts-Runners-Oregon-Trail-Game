@@ -1,24 +1,37 @@
 public class player {
-    double health;
-    double lastDamage = 0;
-    double currentDamage = 0;
-    private boolean Gender; //true if male, false if female
+    private String name;
+    private health health;
+    private String gender;
+    private double lastDamage = 0;
+    private double currentDamage = 0;
 
-    public player(){
-        health = 100;
-        this.setGender(Gender);
+    public player() {
+        playerHealth = new health();
     }
 
-    public void setGender(boolean select){
-        Gender = select;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
     public double getDamage(double damageDone){
         lastDamage = currentDamage;
         return currentDamage = damageDone;
     }
 
-    public double getHealth(){
-        return health;
+    public double getHealth() {
+        return playerHealth.getCurrentHealth();
     }
 
     public double getLastDamage() {
