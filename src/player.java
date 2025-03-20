@@ -4,9 +4,10 @@ public class player {
     private String gender;
     private double lastDamage = 0;
     private double currentDamage = 0;
+    private health playerHealth;
 
     public player() {
-        playerHealth = new health();
+        playerHealth = new health(100);
     }
 
     public void setName(String name) {
