@@ -2,6 +2,11 @@ public class health {
     int maxHealth = 100;
     int currentHealth;
 
+    public health(int startingHealth){
+        maxHealth = startingHealth;
+        currentHealth = startingHealth;
+    }
+
     public void heal(int addHealth){
         currentHealth += addHealth;
         if(currentHealth > maxHealth) currentHealth = maxHealth;
