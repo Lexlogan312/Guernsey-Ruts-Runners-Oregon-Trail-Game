@@ -6,6 +6,7 @@ public class hunting extends randomEvent{
 
     public void hunt() {
         System.out.println("Hunting for food");
+
     }
 
     public void huntSuccess() {

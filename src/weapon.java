@@ -1,6 +1,7 @@
 public class weapon extends item {
     private int power;
     private int accuracy;
+    private int ammo;
 
     public weapon(String name, int quantity) {
         super(name, 5, quantity);
@@ -39,6 +40,10 @@ public class weapon extends item {
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
+
+    public int getAmmo() { return ammo;}
+
+    public void setAmmo(int ammo) { this.ammo = ammo;}
 
     public String toString() {
         return getName() + " (Power: " + power + ", Accuracy: " + accuracy + ", Qty: " + getQuantity() + ")";
