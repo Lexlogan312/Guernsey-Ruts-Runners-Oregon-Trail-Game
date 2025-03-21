@@ -6,7 +6,7 @@ public class inventory {
     item itemInUse;
 
     public inventory() {
-
+        this.inventory = 0;
     }
 
     //Not correct, need fixed
@@ -56,9 +56,10 @@ public class inventory {
                     removeItem(item);
                 }
             }
-            if(items[i].isUsable()){
-
-            }
+            //Should subtract one ammo after gun shot
+            //if(items[i].isUsable()){
+              //  items[i].getName(items[i].setAmmo((items[i].getAmmo())));
+            //}
         }
     }
 
