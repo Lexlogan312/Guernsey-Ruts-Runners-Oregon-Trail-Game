@@ -1,6 +1,6 @@
 public class randomEvent {
     private int probability;
-    private String eventMessage;
+    String eventMessage;
 
     public randomEvent() {
         probability = 0;
