@@ -39,4 +39,3 @@ public class landmark extends map {
         return isTradePost;
     }
 }
-}

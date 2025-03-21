@@ -9,10 +9,12 @@ public class health {
 
     public void heal(int addHealth){
         currentHealth += addHealth;
-        if(currentHealth > maxHealth) currentHealth = maxHealth;
+        if(currentHealth > maxHealth){
+            currentHealth = maxHealth;
+        }
     }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage, String cause){
         currentHealth -= damage;
         if(currentHealth <= 0) currentHealth = 0;
     }
