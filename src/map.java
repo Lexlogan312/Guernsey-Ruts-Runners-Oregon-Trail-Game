@@ -201,6 +201,15 @@ public class map {
         }
     }
 
+    public int getDistanceToNextLandmark() {
+        if (currentLandmarkIndex < landmarks.size() - 1) {
+            int currentDistance = landmarks.get(currentLandmarkIndex).getDistance();
+            int nextDistance = landmarks.get(currentLandmarkIndex + 1).getDistance();
+            return nextDistance - currentDistance;
+        }
+        return totalDistance - landmarks.get(currentLandmarkIndex).getDistance();
+    }
+
     public void displayLandmarkInformation() {
         if (currentLandmarkIndex < landmarks.size()) {
             landmark current = landmarks.get(currentLandmarkIndex);

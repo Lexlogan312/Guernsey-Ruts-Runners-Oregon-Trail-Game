@@ -6,6 +6,7 @@ public class startGame {
     private inventory inventory;
     private currency money;
     private map gameMap;
+    private hunting hunting;
     private static Scanner scanner = new Scanner(System.in);
 
     private static String playerGender;
@@ -26,6 +27,8 @@ public class startGame {
         inventory = new inventory();
         wagon = new wagon();
         gameMap = new map();
+        hunting = new hunting();
+
 
         displayWelcomeMessage();
         selectPlayerGender();
@@ -265,25 +268,42 @@ public class startGame {
                     rest();
                     break;
 
-                case 3: // Hunt
+                case 3: // Look at inventory
+                    System.out.println("----------Inventory----------");
+                    inventory.displayInventory();
+                    break;
+
+                case 4: // Learn about history
 
                     break;
 
-                case 4: // Look at inventory
-
-                    break;
-
-                case 5: // Learn about history
-
-                    break;
-
-                case 6: // Exit game
+                case 5: // Exit game
                     System.out.println("Are you sure you want to quit? (Y/N)");
                     if (scanner.next().equalsIgnoreCase("Y")) {
                         gameRunning = false;
                     }
                     break;
             }
+
+            if (inventory.getFoodAmount() < 500) {
+                if (Math.random()*100+1 < 15) {
+                    System.out.println("You have less than 500 pounds of food left!");
+                    boolean validChoice = false;
+                    while (!validChoice) {
+                        System.out.println("Would you like to hunt for more food? (Y/N)");
+                        String huntingChoice = scanner.nextLine();
+                        if (huntingChoice.equalsIgnoreCase("Y")) {
+                            hunting.hunt();
+                            validChoice = true;
+                        } else if (huntingChoice.equalsIgnoreCase("N")) {
+                            validChoice = true;
+                        } else {
+                            System.out.println("Invalid choice. Please enter Y or N.");
+                        }
+                    }
+                }
+            }
+
 
             if (player.getHealth() <= 0) {
                 System.out.println("\nYou have died from " + player.getCauseOfDeath() + ".");
@@ -325,7 +345,7 @@ public class startGame {
         }
 
         int foodNeeded = 2 * daysToFortKearny;
-        int foodAvailable = playerInventory.getFoodAmount();
+        int foodAvailable = inventory.getFoodAmount();
 
         System.out.println("\n=====================================================");
         System.out.println("       JOURNEY TO FORT KEARNY - " + daysToFortKearny + " DAYS LATER       ");
@@ -335,17 +355,17 @@ public class startGame {
         System.out.println("takes " + daysToFortKearny + " days traveling at a steady pace.");
 
         if (foodAvailable >= foodNeeded) {
-            playerInventory.consumeFood(foodNeeded);
+            inventory.consumeFood(foodNeeded);
             System.out.println("You consumed " + foodNeeded + " pounds of food during this time.");
         } else {
             System.out.println("You didn't have enough food for the journey (" + foodNeeded + " pounds needed).");
             System.out.println("Your party suffers from malnutrition, affecting everyone's health.");
             player.takeDamage(15, "Malnutrition");
-            playerInventory.consumeFood(foodAvailable);
+            inventory.consumeFood(foodAvailable);
         }
 
         distanceTraveled = fortKearnyDistance;
-        totalDays += daysToFortKearny;
+        daysTraveled += daysToFortKearny;
         gameMap.updateLocationToDistance(distanceTraveled);
 
         System.out.println("\nYou have arrived at Fort Kearny, an important military post");
@@ -608,7 +628,7 @@ public class startGame {
         System.out.println("\n----- JOURNEY STATISTICS -----");
         System.out.println("Miles traveled: " + this.distanceTraveled + " of " + this.totalTrailDistance);
         System.out.println("Days on the trail: " + this.daysTraveled);
-        System.out.println("Food remaining: " + playerInventory.getFoodAmount() + " pounds");
+        System.out.println("Food remaining: " + inventory.getFoodAmount() + " pounds");
         System.out.println("Money remaining: $" + money.getBalance());
 
     }

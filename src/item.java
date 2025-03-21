@@ -8,6 +8,8 @@ public class item {
     private boolean isDrinkable;
     private boolean isConsumable;
     private boolean isUsable;
+    private boolean isWeapon;
+    private boolean isWagonPart;
 
     public item(String name, int weight, int quantity, int value, int maximumQuantity) {
         this.name = name;
@@ -25,8 +27,8 @@ public class item {
         this(name, weight, 1, 0);
     }
 
-    public item(String name, int i, int quantity) {
-        this(name, i, quantity, 0);
+    public item(String name) {
+        this.name = name;
     }
 
     public void setItemBoolean(boolean isDrinkable, boolean isConsumable, boolean isUsable, boolean isPerishable) {
@@ -46,6 +48,14 @@ public class item {
 
     public boolean isConsumable(){
         return isConsumable;
+    }
+
+    public boolean isWeapon(){
+        return isWeapon;
+    }
+
+    public boolean isWagonPart(){
+        return isWagonPart;
     }
 
     public boolean isExpired() {
@@ -104,6 +114,10 @@ public class item {
 
     public int getTotalValue() {
         return value * quantity;
+    }
+
+    public void equipItem(item item) {
+        System.out.println("You have equipped " + item.getName());
     }
 
     public String toString() {

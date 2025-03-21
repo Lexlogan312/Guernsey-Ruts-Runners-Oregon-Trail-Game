@@ -3,9 +3,8 @@ public class weapon extends item {
     private int accuracy;
     private int ammo;
 
-    public weapon(String name, int quantity) {
-        super(name, 5, quantity);
-
+    public weapon(String name, int power) {
+        super(name);
         // Set power and accuracy based on weapon type
         if (name.contains("Rifle")) {
             this.power = 8;
@@ -19,8 +18,8 @@ public class weapon extends item {
         }
     }
 
-    public weapon(String name, int quantity, int power, int accuracy) {
-        super(name, 5, quantity);
+    public weapon(String name, int power, int accuracy) {
+        super(name);
         this.power = power;
         this.accuracy = accuracy;
     }
@@ -39,6 +38,12 @@ public class weapon extends item {
 
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
+    }
+
+    public void shoot(weapon weapon) {
+        System.out.println("You shoot the " + weapon.getName() + "!");
+        System.out.println("Power: " + weapon.getPower());
+        System.out.println("Accuracy: " + weapon.getAccuracy());
     }
 
     public int getAmmo() { return ammo;}
@@ -85,14 +90,14 @@ public class weapon extends item {
     }
 
     public static weapon createHuntingRifle(int quantity) {
-        return new weapon("Hunting Rifle", quantity, 8, 7);
+        return new weapon("Hunting Rifle", 8, 7);
     }
 
     public static weapon createPistol(int quantity) {
-        return new weapon("Pistol", quantity, 5, 5);
+        return new weapon("Pistol", 5, 5);
     }
 
     public static weapon createKnife(int quantity) {
-        return new weapon("Hunting Knife", quantity, 3, 9);
+        return new weapon("Hunting Knife", 3, 9);
     }
 }

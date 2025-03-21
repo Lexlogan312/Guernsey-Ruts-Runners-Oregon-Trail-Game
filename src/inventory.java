@@ -86,4 +86,66 @@ public class inventory {
             }
         }
     }
+
+    public void selectItem(item item) {
+        itemInUse = item;
+    }
+
+    public item getItemInUse() {
+        return itemInUse;
+    }
+
+    public void displayWeapons() {
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].isWeapon()){
+                    System.out.print(items[i] + " ");
+                }
+            }
+        }
+    }
+
+    public void displayConsumables() {
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].isConsumable()){
+                    System.out.print(items[i] + " ");
+                }
+            }
+        }
+    }
+
+    public void displayWagonParts() {
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].isWagonPart()){
+                    System.out.print(items[i] + " ");
+                }
+            }
+        }
+    }
+
+    public int getFoodAmount() {
+        int foodAmount = 0;
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].isConsumable()){
+                    foodAmount += items[i].getQuantity();
+                }
+            }
+        }
+        return foodAmount;
+    }
+
+    public int getTotalFoodWeight(){
+        int totalFoodWeight = 0;
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].isConsumable()){
+                    totalFoodWeight += items[i].getWeight() * items[i].getQuantity();
+                }
+            }
+        }
+        return totalFoodWeight;
+    }
 }
