@@ -5,7 +5,7 @@ public class hunting extends randomEvent{
     }
 
     public void hunt() {
-
+      
     }
 
     public void huntSuccess() {

@@ -19,6 +19,8 @@ public class startGame {
     private int totalTrailDistance;
     private int daysTraveled;
     private int distanceTraveled;
+    private String[] months = {"March", "April", "May", "June", "July"};
+    private int monthChoice;
 
     public startGame() {
         player = new player();
@@ -153,8 +155,6 @@ public class startGame {
         System.out.println("Leave too late: risk being trapped in mountain snow.");
         System.out.println("\nMost emigrants departed between April and June.");
 
-        String[] months = {"March", "April", "May", "June", "July"};
-
         System.out.println("\nSelect your departure month:");
         for (int i = 0; i < months.length; i++) {
             System.out.println((i+1) + ". " + months[i]);
@@ -164,9 +164,9 @@ public class startGame {
         while (!validChoice) {
             System.out.print("\nEnter your choice (1-5): ");
             try {
-                int choice = Integer.parseInt(scanner.nextLine());
-                if (choice >= 1 && choice <= 5) {
-                    departureMonth = months[choice-1];
+                monthChoice = Integer.parseInt(scanner.nextLine());
+                if (monthChoice >= 1 && monthChoice <= 5) {
+                    departureMonth = months[monthChoice-1];
                     validChoice = true;
 
                     // Historical context based on month choice
@@ -228,8 +228,8 @@ public class startGame {
     public void beginJourney() {
         boolean gameRunning = true;
         movement travel = new movement(gameMap, trail);
-        weather currentWeather = new weather();
-        currentWeather.setInitialWeather(departureMonth);
+        weather currentWeather = new weather(months[monthChoice-1]);
+        currentWeather.setWeather(departureMonth);
 
         totalTrailDistance = gameMap.getTotalDistance();
         daysTraveled = 1;
