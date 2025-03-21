@@ -1,5 +1,3 @@
-import java.util.Date;
-import java.time.*;
 import java.lang.*;
 
 public abstract class time {
@@ -17,9 +15,8 @@ public abstract class time {
         this.minute = minute;
     }
 
-    public time(String month, String day){
+    public time(String month){
         this.month = month;
-        this.day = day;
     }
 
     public double returnTime(){
