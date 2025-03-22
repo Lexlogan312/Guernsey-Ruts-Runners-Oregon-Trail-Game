@@ -6,7 +6,8 @@ public class landmark extends map {
     private boolean hasRiver;
     private boolean isTradePost;
 
-    public landmark(String name, int distance, String description, String historicalInfo, boolean hasRiver, boolean isTradePost) {
+    public landmark(String name, int positionX, int positionY, int distance, String description, String historicalInfo, boolean hasRiver, boolean isTradePost) {
+        super(positionX, positionY);
         this.name = name;
         this.distance = distance;
         this.description = description;

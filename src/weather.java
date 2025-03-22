@@ -4,13 +4,28 @@ public class weather extends time{
     double windSpeed;
     boolean precipitation;
     double precipitationAmount;
+    int weatherStrength;
 
     public weather(String month) {
         super(month);
+        weatherStrength = setWeatherStrength();
     }
 
     //Add more switch statements in this switch statement to create more weather scenarios
-    public void setWeather() {
+    public void updateWeather(int days, String month) {
+        int monthNumber = Integer.parseInt(month);
+        if(days % 31 == 0) monthNumber++;
+        switch(monthNumber){
+            case 3: findWeatherPossibilityProbability(); setTemperature(temperature+10); setHumidity(); break;
+            case 4: findWeatherPossibilityProbability(); setTemperature(temperature+15); setHumidity(); break;
+            case 5: findWeatherPossibilityProbability(); setTemperature(temperature+20); setHumidity(); break;
+            case 6: findWeatherPossibilityProbability(); setTemperature(temperature+25); setHumidity(); break;
+            case 7: findWeatherPossibilityProbability(); setTemperature(temperature+35); setHumidity(); break;
+        }
+        setTime(days, monthNumber);
+    }
+
+    public void updateWeather(){
         switch(this.getMonth()){
             case 3: findWeatherPossibilityProbability(); setTemperature(temperature+10); setHumidity(); break;
             case 4: findWeatherPossibilityProbability(); setTemperature(temperature+15); setHumidity(); break;
@@ -20,11 +35,12 @@ public class weather extends time{
         }
     }
 
-    public void getWeather() {
+    public int getWeather() {
         System.out.println("The temperature is: " + temperature + " degrees Fahrenheit");
         System.out.println("The humidity is: " + humidity + "%");
         System.out.println("The wind speed is: " + windSpeed + " mph");
         if(precipitation) System.out.println("The precipitation is: " + precipitationAmount + " inches");
+        return weatherStrength;
     }
 
     public void setTemperature(double temperature) {
@@ -60,7 +76,7 @@ public class weather extends time{
     }
 
     public int setWeatherStrength(){
-        return Integer.parseInt(String.valueOf(Math.random() * 10 + 1));
+        return weatherStrength = Integer.parseInt(String.valueOf(Math.random() * 10 + 1));
     }
 
     public double getPrecipitationChance(){
@@ -88,7 +104,7 @@ public class weather extends time{
         int weatherPossibility = Integer.parseInt(String.valueOf(Math.random()*10+1));
         switch(weatherPossibility){
             case 1:
-                if(setWeatherStrength() > 10){
+                if(weatherStrength > 10){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -101,7 +117,7 @@ public class weather extends time{
                 }
                 break;
             case 2:
-                if(setWeatherStrength() > 9){
+                if(weatherStrength > 9){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -114,7 +130,7 @@ public class weather extends time{
                 }
                 break;
             case 3:
-                if(setWeatherStrength() > 8){
+                if(weatherStrength > 8){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -127,7 +143,7 @@ public class weather extends time{
                 }
                 break;
             case 4:
-                if(setWeatherStrength() > 7){
+                if(weatherStrength > 7){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -140,7 +156,7 @@ public class weather extends time{
                 }
                 break;
             case 5:
-                if(setWeatherStrength() > 6){
+                if(weatherStrength > 6){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -153,7 +169,7 @@ public class weather extends time{
                 }
                 break;
             case 6:
-                if(setWeatherStrength() > 5){
+                if(weatherStrength > 5){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -166,7 +182,7 @@ public class weather extends time{
                 }
                 break;
             case 7:
-                if(setWeatherStrength() > 4){
+                if(weatherStrength > 4){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -179,7 +195,7 @@ public class weather extends time{
                 }
                 break;
             case 8:
-                if(setWeatherStrength() > 3){
+                if(weatherStrength > 3){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -192,7 +208,7 @@ public class weather extends time{
                 }
                 break;
             case 9:
-                if(setWeatherStrength() > 2){
+                if(weatherStrength > 2){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
@@ -205,7 +221,7 @@ public class weather extends time{
                 }
                 break;
             case 10:
-                if(setWeatherStrength() > 1){
+                if(weatherStrength > 1){
                     setHeavyWindSpeed();
                     getPrecipitationAmount();
                     precipitation = true;
