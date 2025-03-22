@@ -1,6 +1,7 @@
 import java.lang.*;
+import java.time.*;
 
-public abstract class time {
+public class time {
     String month;
     String day;
     String year;
@@ -19,6 +20,9 @@ public abstract class time {
         this.month = month;
     }
 
+    public time(){
+
+    }
     public double returnTime(){
         return Double.parseDouble(year) + Double.parseDouble(hour) + Double.parseDouble(minute);
     }
@@ -46,5 +50,17 @@ public abstract class time {
 
     public int getYear(){
         return Integer.parseInt(year);
+    }
+
+    public String calculateArrivalDate(int startMonth, int daysTraveled) {
+        // Assume travel starts at the beginning of the specified month in a standard year
+        LocalDate startDate = LocalDate.of(1848, startMonth, 1); // Using 1848 as a placeholder year
+        LocalDate arrivalDate = startDate.plusDays(daysTraveled);
+
+        // Extract the month and day of arrival
+        Month arrivalMonth = arrivalDate.getMonth();
+        int arrivalDay = arrivalDate.getDayOfMonth();
+
+        return arrivalMonth + " " + arrivalDay;
     }
 }

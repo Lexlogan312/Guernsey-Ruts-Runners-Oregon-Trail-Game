@@ -7,6 +7,7 @@ public class startGame {
     private inventory inventory;
     private currency money;
     private hunting hunting;
+    private time time;
     private static Scanner scanner = new Scanner(System.in);
 
     private static String playerGender;
@@ -29,8 +30,7 @@ public class startGame {
         wagon = new wagon();
         hunting = new hunting();
         gameMap = new map(0,0);
-
-
+        time = new time();
 
         displayWelcomeMessage();
         selectPlayerGender();
@@ -171,7 +171,6 @@ public class startGame {
                     departureMonth = months[monthChoice-1];
                     validChoice = true;
 
-                    // Historical context based on month choice
                     switch (monthChoice) {
                         case 1:
                             System.out.println("\nMarch: An early start, but you'll face muddy trails and swollen rivers.");
@@ -623,21 +622,21 @@ public class startGame {
 
             if (trail.equals("Oregon")) {
                 System.out.println("\nYou've successfully traveled 830 miles from " + departureLocation + ".");
-                System.out.println("It's now " + calculateArrivalDate(daysTraveled) + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
+                System.out.println("It's now " + time.calculateArrivalDate(monthChoice+2, daysTraveled) + ", " + 1848 + ".");
                 System.out.println("\nHistorical Context: Independence Rock marked a crucial milestone for");
                 System.out.println("Oregon-bound emigrants. From here, they would continue to South Pass,");
                 System.out.println("Fort Bridger, and eventually face the challenging Blue Mountains");
                 System.out.println("before reaching Oregon's Willamette Valley after another 1,340 miles.");
             } else if (trail.equals("California")) {
                 System.out.println("\nYou've successfully traveled 830 miles from " + departureLocation + ".");
-                System.out.println("It's now " + calculateArrivalDate(daysTraveled) + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
+                System.out.println("It's now " + time.calculateArrivalDate(monthChoice+2, daysTraveled) + ", " + 1848 + ".");
                 System.out.println("\nHistorical Context: After Independence Rock, California-bound");
                 System.out.println("emigrants faced another 1,120 miles through South Pass,");
                 System.out.println("the Great Basin Desert, and the Sierra Nevada mountains before");
                 System.out.println("reaching the gold fields and farmlands of California.");
             } else { // Mormon Trail
                 System.out.println("\nYou've successfully traveled 965 miles from " + departureLocation + ".");
-                System.out.println("It's now " + calculateArrivalDate(daysTraveled) + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
+                System.out.println("It's now " + time.calculateArrivalDate(monthChoice+2, daysTraveled) + ", " + 1848 + ".");
                 System.out.println("\nHistorical Context: After Independence Rock, the Mormon pioneers");
                 System.out.println("continued another 335 miles through South Pass and Echo Canyon");
                 System.out.println("before finally establishing their new home in the Salt Lake Valley.");
