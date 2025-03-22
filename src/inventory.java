@@ -4,6 +4,7 @@ public class inventory {
     int inventory;
     item[] items = new item[maxInventorySpace];
     item itemInUse;
+    food foodInUse;
 
     public inventory() {
         this.inventory = 0;
@@ -147,5 +148,21 @@ public class inventory {
             }
         }
         return totalFoodWeight;
+    }
+
+    public void consumeFood(int amount) {
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].isConsumable()){
+                    if(items[i].getQuantity() > amount){
+                        items[i].setQuantity(items[i].getQuantity() - amount);
+                    }
+                    else{
+                        items[i] = null;
+                        inventory--;
+                    }
+                }
+            }
+        }
     }
 }

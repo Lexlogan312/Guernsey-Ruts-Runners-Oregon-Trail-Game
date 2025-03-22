@@ -31,6 +31,10 @@ public class item {
         this.name = name;
     }
 
+    public item(String name, int weight, int quantity) {
+        this(name, weight, quantity, 0);
+    }
+
     public void setItemBoolean(boolean isDrinkable, boolean isConsumable, boolean isUsable, boolean isPerishable) {
         this.isDrinkable = isDrinkable;
         this.isConsumable = isConsumable;

@@ -77,6 +77,16 @@ public class player {
         return hunger;
     }
 
+    public int addHunger(int amount){
+        hunger += amount;
+        return hunger;
+    }
+
+    public int removeHunger(int amount){
+        hunger -= amount;
+        if(hunger < 0) hunger = 0;
+        return hunger;
+    }
     public int getFatigue() {
         return fatigue;
     }
@@ -87,5 +97,11 @@ public class player {
 
     public String getIllness() {
         return illness;
+    }
+
+    public void rest(){
+        fatigue += (int) Math.abs((fatigue + 10 * 0.5) / 2);
+        playerHealth.heal(10);
+        removeHunger(10);
     }
 }

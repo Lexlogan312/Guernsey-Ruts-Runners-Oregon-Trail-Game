@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class startGame {
     private player player;
+    private map gameMap;
     private wagon wagon;
     private inventory inventory;
     private currency money;
-    private map gameMap;
     private hunting hunting;
     private static Scanner scanner = new Scanner(System.in);
 
@@ -21,13 +21,15 @@ public class startGame {
     private int distanceTraveled;
     private String[] months = {"March", "April", "May", "June", "July"};
     private int monthChoice;
+    private String marketLocation;
 
     public startGame() {
         player = new player();
         inventory = new inventory();
         wagon = new wagon();
-        gameMap = new map();
         hunting = new hunting();
+        gameMap = new map(0,0);
+
 
 
         displayWelcomeMessage();
@@ -170,7 +172,7 @@ public class startGame {
                     validChoice = true;
 
                     // Historical context based on month choice
-                    switch (choice) {
+                    switch (monthChoice) {
                         case 1:
                             System.out.println("\nMarch: An early start, but you'll face muddy trails and swollen rivers.");
                             break;
@@ -227,9 +229,9 @@ public class startGame {
 
     public void beginJourney() {
         boolean gameRunning = true;
-        movement travel = new movement(gameMap, trail);
+        movement playerMovement = new movement(gameMap);
         weather currentWeather = new weather(months[monthChoice-1]);
-        currentWeather.setWeather(departureMonth);
+        currentWeather.updateWeather();
 
         totalTrailDistance = gameMap.getTotalDistance();
         daysTraveled = 1;
@@ -238,6 +240,8 @@ public class startGame {
         visitStore();
 
         fastForwardToFortKearny();
+
+        System.out.println("Game started! Your current position is: " + gameMap.getPlayerX() + ", " + gameMap.getPlayerY());
 
         while (gameRunning) {
             // Display current day and location
@@ -248,7 +252,7 @@ public class startGame {
 
             // Update weather each day with a small chance of change
             currentWeather.updateWeather(daysTraveled, departureMonth);
-            System.out.println("Weather: " + currentWeather.getCurrentWeather());
+            System.out.println("Weather: " + currentWeather.getWeather());
 
             // Daily food consumption
             consumeDailyFood();
@@ -265,7 +269,8 @@ public class startGame {
                     break;
 
                 case 2: // Rest
-                    rest();
+                    player.rest();
+                    daysTraveled++;
                     break;
 
                 case 3: // Look at inventory
@@ -313,13 +318,34 @@ public class startGame {
             }
 
             daysTraveled++;
+
+            String direction = scanner.nextLine().toLowerCase();
+
+            if(direction.equals("exit")){
+                System.out.println("Exiting game...");
+                break;
+            }
+
+            System.out.print("Enter distance to travel: ");
+            int distance;
+            try{
+                distance = Integer.parseInt(scanner.nextLine());
+            }catch(NumberFormatException e){
+                System.out.println("Invalid distance. Please enter a alid distance");
+                continue;
+            }
+
+            playerMovement.travel(direction, distance);
+
+            System.out.println("You moved " + distance + " miles.");
+            System.out.println("Current position: " + gameMap.getPlayerX() + ", " + gameMap.getPlayerY());
         }
 
         displayGameSummary(daysTraveled, distanceTraveled);
     }
 
     private void visitStore() {
-        market store = new market(money, inventory);
+        market store = new market(money, gameMap, marketLocation);
         store.visitStore(departureLocation);
     }
 
@@ -597,21 +623,21 @@ public class startGame {
 
             if (trail.equals("Oregon")) {
                 System.out.println("\nYou've successfully traveled 830 miles from " + departureLocation + ".");
-                System.out.println("It's now " + calculateArrivalDate() + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
+                System.out.println("It's now " + calculateArrivalDate(daysTraveled) + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
                 System.out.println("\nHistorical Context: Independence Rock marked a crucial milestone for");
                 System.out.println("Oregon-bound emigrants. From here, they would continue to South Pass,");
                 System.out.println("Fort Bridger, and eventually face the challenging Blue Mountains");
                 System.out.println("before reaching Oregon's Willamette Valley after another 1,340 miles.");
             } else if (trail.equals("California")) {
                 System.out.println("\nYou've successfully traveled 830 miles from " + departureLocation + ".");
-                System.out.println("It's now " + calculateArrivalDate() + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
+                System.out.println("It's now " + calculateArrivalDate(daysTraveled) + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
                 System.out.println("\nHistorical Context: After Independence Rock, California-bound");
                 System.out.println("emigrants faced another 1,120 miles through South Pass,");
                 System.out.println("the Great Basin Desert, and the Sierra Nevada mountains before");
                 System.out.println("reaching the gold fields and farmlands of California.");
             } else { // Mormon Trail
                 System.out.println("\nYou've successfully traveled 965 miles from " + departureLocation + ".");
-                System.out.println("It's now " + calculateArrivalDate() + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
+                System.out.println("It's now " + calculateArrivalDate(daysTraveled) + ", " + (1848 + (departureMonth.equals("July") ? 1 : 0)) + ".");
                 System.out.println("\nHistorical Context: After Independence Rock, the Mormon pioneers");
                 System.out.println("continued another 335 miles through South Pass and Echo Canyon");
                 System.out.println("before finally establishing their new home in the Salt Lake Valley.");
