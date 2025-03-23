@@ -20,9 +20,10 @@ public class food extends item {
         this.perishable = perishable;
     }
 
-    public void eat() {
+    public void eat(int amount) {
         System.out.println("You eat the " + this.getName() + ".");
         System.out.println("Nutrition value: " + nutrition);
+        this.decreaseQuantity(amount);
     }
 
     public int getNutrition() {
