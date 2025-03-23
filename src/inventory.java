@@ -1,4 +1,4 @@
-public class inventory {
+public class inventory{
 
     int maxInventorySpace = 30;
     int inventory;
@@ -11,41 +11,59 @@ public class inventory {
     }
 
     //Not correct, need fixed
-    public void addItem(item item) {
-        if(inventory < maxInventorySpace){
-            for(int i = 0; i < inventory; i++){
-                if(items[i] == null || items[i].getName().equals(item.getName())){
-                    if(items[i].getQuantity() < items[i].getMaximumQuantity()) {
-                        items[i] = item;
-                        inventory++;
-                    }
-                    else{
-                        if(items[i+1] == null){
-                            items[i+1] = item;
-                            inventory++;
-                        }
-                        else{
-                            addItem(item);
-                        }
+    public void addItem(item item, int quantity) {
+        if (inventory < maxInventorySpace) {
+            boolean itemAdded = false;
+
+            // Try to add to existing item stack or find an empty spot
+            for (int i = 0; i < inventory; i++) {
+                // Check if the item already exists or an empty spot is found
+                if (items[i] == null || items[i].getName().equals(item.getName())) {
+                    // Check if we can increase quantity of the current item
+                    if (items[i].getQuantity() + quantity <= items[i].getMaximumQuantity()) {
+                        items[i].setQuantity(items[i].getQuantity() + quantity);
+                        itemAdded = true;
+                        break;
                     }
                 }
             }
-        }
-        else{
-            System.out.println("Your inventory is full\nDrop an Item if you want to pick this up");
+
+            // If item was not added, add it to the next available slot
+            if (!itemAdded) {
+                // Ensure there's room before trying to add a new item
+                if (inventory < maxInventorySpace) {
+                    for (int i = 0; i < maxInventorySpace; i++) {
+                        // Find the next empty slot
+                        if (items[i] == null) {
+                            items[i] = item;  // Add item to the empty slot
+                            inventory++;
+                            break;
+                        }
+                    }
+                } else {
+                    System.out.println("No more space in inventory.");
+                }
+            }
+        } else {
+            System.out.println("Your inventory is full. Drop an item if you want to pick this up.");
         }
     }
 
-    public void removeItem(item item) {
+    public void removeItem(item item, int quantity) {
         for(int i = 0; i < inventory; i++){
             if(items[i] == item){
-                items[i] = null;
-                inventory--;
+                if(items[i].getQuantity() > quantity){
+                    items[i].setQuantity(items[i].getQuantity() - quantity);
+                }
+                else{
+                    items[i] = null;
+                    inventory--;
+                }
             }
         }
     }
 
-    public void useItem(item item) {
+    public void useItem(item item, int quantity) {
         for(int i = 0; i < inventory; i++){
             if(items[i].isPerishable()) {
                 if (!items[i].isExpired()) {
@@ -54,7 +72,7 @@ public class inventory {
                         items[i].setQuantity(items[i].getQuantity() - 1);
                     }
                 } else {
-                    removeItem(item);
+                    removeItem(item, quantity);
                 }
             }
             //Should subtract one ammo after gun shot
@@ -92,8 +110,15 @@ public class inventory {
         itemInUse = item;
     }
 
-    public item getItemInUse() {
-        return itemInUse;
+    public item getItemInUse(String itemName) {
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].getName().equals(itemName)){
+                    return items[i];
+                }
+            }
+        }
+        return null;
     }
 
     public void displayWeapons() {
@@ -164,5 +189,27 @@ public class inventory {
                 }
             }
         }
+    }
+
+    public boolean hasItem(String itemName) {
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].getName().equals(itemName)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int getItemQuantity(item item){
+        for(int i = 0; i < inventory; i++){
+            if(items[i] != null){
+                if(items[i].getName().equals(item.getName())){
+                    return items[i].getQuantity();
+                }
+            }
+        }
+        return 0;
     }
 }
