@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * OregonTrail Class of the Perils Along the Platte Game
  * Sets up the main game window and initializes the game gui.
