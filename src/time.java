@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Time Class of the Perils Along the Platte Game
  * Manages game time, date tracking, and temporal events.

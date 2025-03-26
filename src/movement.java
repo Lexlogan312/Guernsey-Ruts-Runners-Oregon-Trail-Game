@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Movement Class of the Perils Along the Platte Game
  * Manages player movement across the game map.

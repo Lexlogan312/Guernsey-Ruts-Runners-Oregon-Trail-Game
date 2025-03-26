@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Map Class of the Perils Along the Platte Game
  * Represents the game world map with landmarks, distances, and trail information.

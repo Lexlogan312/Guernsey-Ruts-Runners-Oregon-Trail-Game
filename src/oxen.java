@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Oxen Class of the Perils Along the Platte Game
  * Represents the draft animals that pull the pioneer wagon.

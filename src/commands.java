@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Commands Class of the Perils Along the Platte Game
  * Processes and executes player commands during gameplay.

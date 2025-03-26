@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * RiverCrossing Class of the Perils Along the Platte Game
  * Manages river crossing events during the journey.

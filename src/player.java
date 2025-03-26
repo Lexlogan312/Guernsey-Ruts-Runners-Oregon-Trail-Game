@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Player Class of the Perils Along the Platte Game
  * Represents the player character with attributes such as health, hunger, and inventory.

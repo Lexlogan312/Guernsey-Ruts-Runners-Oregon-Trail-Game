@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Main Class of the Perils Along the Platte Game
  * Entry point for the game application that initializes and starts the game.

@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Weapon Class of the Perils Along the Platte Game
  * Represents weapons that can be used for hunting and protection.

@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Trading Class of the Perils Along the Platte Game
  * Manages trading interactions with NPCs and merchants.

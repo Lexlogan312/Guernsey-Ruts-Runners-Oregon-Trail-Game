@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Weather Class of the Perils Along the Platte Game
  * Manages weather conditions and their impact on gameplay.

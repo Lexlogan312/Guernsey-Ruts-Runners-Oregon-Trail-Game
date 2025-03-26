@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Market Class of the Perils Along the Platte Game
  * Represents stores and trading posts where players can buy and sell items.

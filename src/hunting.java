@@ -1,5 +1,3 @@
-package termProject;
-
 /**
  * Hunting Class of the Perils Along the Platte Game
  * Manages hunting mechanics to acquire food during the journey.
