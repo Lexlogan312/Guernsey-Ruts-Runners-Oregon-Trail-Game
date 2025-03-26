@@ -1,3 +1,13 @@
+/**
+ * Market Class of the Perils Along the Platte Game
+ * Represents stores and trading posts where players can buy and sell items.
+ * Manages inventory, pricing, transactions, and location-based market access.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : market.java
+ */
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +19,14 @@ public class market {
     private map gameMap;  // Instance of the map class
     private String marketLocation;  // Market's location on the map
 
-    // Constructor now takes a map and location for the market
+    /**
+     * Constructor for creating a market with initial money, location and map.
+     * Initializes the market's inventory with some default items.
+     * 
+     * @param startingMoney The currency object to track money
+     * @param gameMap The game map instance
+     * @param marketLocation The location of the market on the map
+     */
     public market(currency startingMoney, map gameMap, String marketLocation) {
         this.money = startingMoney;
         this.gameMap = gameMap;
@@ -23,12 +40,19 @@ public class market {
         addItemToMarket(new item("steak", 3, 2, 10, 10));  // steak with weight 3, 2 quantity, value 10, max quantity 10
     }
 
-    // Add item to market inventory
+    /**
+     * Adds a new item to the market's available inventory.
+     * 
+     * @param newItem The item to add to the market
+     */
     public void addItemToMarket(item newItem) {
         availableItems.add(newItem);
     }
 
-    // Display the available items in the market
+    /**
+     * Displays all items currently available for purchase in the market.
+     * Shows name, quantity, weight, and price for each item.
+     */
     public void displayItems() {
         System.out.println("\nAvailable Items in the Market:");
         for (item i : availableItems) {
@@ -36,7 +60,14 @@ public class market {
         }
     }
 
-    // Buy an item from the market
+    /**
+     * Allows the player to buy an item from the market.
+     * Checks if the item exists, if there's enough quantity available,
+     * and if the player has enough money.
+     * 
+     * @param itemName The name of the item to buy
+     * @param quantity The quantity of the item to buy
+     */
     public void buyItem(String itemName, int quantity) {
         item itemToBuy = findItemInMarket(itemName);
         if (itemToBuy != null) {
@@ -64,7 +95,13 @@ public class market {
         }
     }
 
-    // Sell an item from the player's inventory
+    /**
+     * Allows the player to sell an item to the market.
+     * Checks if the player has the item and enough quantity to sell.
+     * 
+     * @param itemName The name of the item to sell
+     * @param quantity The quantity of the item to sell
+     */
     public void sellItem(String itemName, int quantity) {
         item itemToSell = findItemInInventory(itemName);
         if (itemToSell != null && itemToSell.getQuantity() >= quantity) {
@@ -78,7 +115,12 @@ public class market {
         }
     }
 
-    // Find item in the market by name
+    /**
+     * Finds an item in the market's inventory by name.
+     * 
+     * @param name The name of the item to find
+     * @return The item if found, null otherwise
+     */
     private item findItemInMarket(String name) {
         for (item i : availableItems) {
             if (i.getName().equalsIgnoreCase(name)) {
@@ -88,7 +130,12 @@ public class market {
         return null; // Item not found
     }
 
-    // Find item in player's inventory by name
+    /**
+     * Finds an item in the player's inventory by name.
+     * 
+     * @param name The name of the item to find
+     * @return The item if found, null otherwise
+     */
     private item findItemInInventory(String name) {
         for (item i : playerInventory) {
             if (i.getName().equalsIgnoreCase(name)) {
@@ -98,7 +145,10 @@ public class market {
         return null; // Item not found
     }
 
-    // Display player's inventory
+    /**
+     * Displays all items currently in the player's inventory.
+     * Shows name, quantity, and weight for each item.
+     */
     public void displayInventory() {
         System.out.println("\nYour Inventory:");
         if (playerInventory.isEmpty()) {
@@ -110,12 +160,20 @@ public class market {
         }
     }
 
-    // Check balance of money
+    /**
+     * Displays the current money balance to the player.
+     */
     public void checkBalance() {
         System.out.println("Current balance: $" + money.getBalance());
     }
 
-    // Visit the market if the player is at the correct location on the map
+    /**
+     * Provides a complete market interface for the player to interact with.
+     * Only works if the player is at the correct location.
+     * Allows buying, selling, and viewing inventory.
+     * 
+     * @param playerLocation The player's current location
+     */
     public void visitStore(String playerLocation) {
         if (playerLocation.equalsIgnoreCase(marketLocation)) {
             // Proceed to interact with the market
@@ -172,12 +230,20 @@ public class market {
         }
     }
 
-    // Getter for the market's location
+    /**
+     * Gets the market's location on the map.
+     * 
+     * @return The name of the market's location
+     */
     public String getMarketLocation() {
         return marketLocation;
     }
 
-    // Setter for the market's location
+    /**
+     * Sets the market's location on the map.
+     * 
+     * @param marketLocation The new location for the market
+     */
     public void setMarketLocation(String marketLocation) {
         this.marketLocation = marketLocation;
     }

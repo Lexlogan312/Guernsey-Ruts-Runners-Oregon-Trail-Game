@@ -1,16 +1,33 @@
+/**
+ * Perils Class of the Perils Along the Platte Game
+ * Manages various hazards and events that can occur during the journey.
+ * Handles accidents, illnesses, river crossings, and other random events.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : perils.java
+ */
 import java.util.Random;
 
 public class perils {
     private player player;  // The player involved in the peril events
     private Random random;  // Random object to simulate chance events
 
-    // Constructor to initialize the Perils class with the player
+    /**
+     * Constructor to initialize the Perils class with a player.
+     * 
+     * @param player The player who will be affected by perils
+     */
     public perils(player player) {
         this.player = player;
         this.random = new Random();
     }
 
-    // Method to simulate an accident (Humans, Animals, Wagon)
+    /**
+     * Simulates the possibility of an accident occurring.
+     * Accidents can damage the wagon, injure oxen, or harm the player.
+     */
     public void accident() {
         int chance = random.nextInt(100);
         if (chance < 30) {  // 30% chance of an accident
@@ -34,7 +51,10 @@ public class perils {
         }
     }
 
-    // Method to simulate illness (Humans and Animals)
+    /**
+     * Simulates the possibility of illness affecting the party.
+     * Illnesses can affect humans or oxen, reducing their health.
+     */
     public void illness() {
         int chance = random.nextInt(100);
         if (chance < 25) {  // 25% chance of illness
@@ -53,7 +73,10 @@ public class perils {
         }
     }
 
-    // Method to simulate pregnancy (Humans)
+    /**
+     * Simulates the possibility of a pregnancy occurring in the party.
+     * Pregnancy temporarily reduces health due to the need for rest.
+     */
     public void pregnancy() {
         int chance = random.nextInt(100);
         if (chance < 15) {  // 15% chance of pregnancy
@@ -63,7 +86,10 @@ public class perils {
         }
     }
 
-    // Method to simulate river crossing
+    /**
+     * Simulates crossing a river with varying difficulty.
+     * River crossings can damage the wagon, requiring repairs.
+     */
     public void riverCrossing() {
         int chance = random.nextInt(100);
         if (chance < 50) {  // 50% chance of a difficult river crossing
@@ -80,7 +106,10 @@ public class perils {
         }
     }
 
-    // Method to simulate supply issues (Lost, Stolen, Rancid)
+    /**
+     * Simulates issues with supplies including theft, spoilage, and loss.
+     * Supply issues can reduce food quantities or cost money.
+     */
     public void supplies() {
         int chance = random.nextInt(100);
         if (chance < 20) {  // 20% chance of supply issue
@@ -115,8 +144,10 @@ public class perils {
         }
     }
 
-
-    // Method to simulate weather events
+    /**
+     * Simulates weather events that can impact the journey.
+     * Bad weather can spoil food or affect the health of oxen.
+     */
     public void weather() {
         int chance = random.nextInt(100);
         if (chance < 30) {  // 30% chance of bad weather

@@ -1,3 +1,13 @@
+/**
+ * StartGame Class of the Perils Along the Platte Game
+ * Controls the initialization, progression, and main gameplay loop of the Oregon Trail-style game.
+ * Manages player creation, trail selection, game mechanics, and narrative elements.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : startGame.java
+ */
 import java.util.Scanner;
 
 public class startGame {
@@ -24,11 +34,16 @@ public class startGame {
     private int monthChoice;
     private String marketLocation;
 
+    /**
+     * Constructor for the startGame class.
+     * Initializes game objects, displays welcome messages, and guides the player through
+     * initial setup including character creation, trail selection, and departure month.
+     */
     public startGame() {
         player = new player();
         inventory = new inventory();
         wagon = new wagon();
-        hunting = new hunting();
+        hunting = new hunting(player);
         gameMap = new map(0,0);
         time = new time();
 
@@ -39,6 +54,10 @@ public class startGame {
         setupInitialConditions();
     }
 
+    /**
+     * Displays the welcome message and introduction to the game.
+     * Presents the title screen and basic information about the historical context.
+     */
     public void displayWelcomeMessage() {
         System.out.println("=====================================================");
         System.out.println("               Perils Along the Platte               ");
@@ -52,6 +71,10 @@ public class startGame {
         scanner.nextLine();
     }
 
+    /**
+     * Prompts the player to select their character's gender and name.
+     * Gender choice affects certain encounters and situations in the game.
+     */
     public void selectPlayerGender() {
         System.out.println("\n=====================================================");
         System.out.println("                CHARACTER SELECTION                  ");
@@ -95,6 +118,10 @@ public class startGame {
         player.setName(playerName);
     }
 
+    /**
+     * Allows the player to choose which historical trail to follow.
+     * Each trail has different distances, destinations, and challenges.
+     */
     public void selectTrail() {
         System.out.println("\n=====================================================");
         System.out.println("                   TRAIL SELECTION                   ");
@@ -147,6 +174,10 @@ public class startGame {
         System.out.println("Your journey will begin in " + departureLocation + ".");
     }
 
+    /**
+     * Prompts the player to select which month to depart on their journey.
+     * The departure month affects weather conditions, trail status, and available time.
+     */
     public void selectDepartureMonth() {
         System.out.println("\n=====================================================");
         System.out.println("              DEPARTURE MONTH SELECTION              ");
@@ -197,6 +228,10 @@ public class startGame {
         }
     }
 
+    /**
+     * Sets up the initial game conditions based on player choices.
+     * Initializes inventory, currency, and other game state variables.
+     */
     public void setupInitialConditions() {
         System.out.println("\n=====================================================");
         System.out.println("                PREPARING FOR DEPARTURE              ");
@@ -226,6 +261,10 @@ public class startGame {
         beginJourney();
     }
 
+    /**
+     * Starts the main journey and gameplay loop.
+     * Handles day-to-day travel, events, and player decisions.
+     */
     public void beginJourney() {
         boolean gameRunning = true;
         movement playerMovement = new movement(gameMap);
@@ -343,11 +382,19 @@ public class startGame {
         displayGameSummary(daysTraveled, distanceTraveled);
     }
 
+    /**
+     * Initiates the market/store interface for purchasing supplies.
+     * Allows player to buy items needed for the journey.
+     */
     private void visitStore() {
         market store = new market(money, gameMap, marketLocation);
         store.visitStore(departureLocation);
     }
 
+    /**
+     * Advances game time to simulate travel to Fort Kearny.
+     * Updates game state variables to reflect the journey to this landmark.
+     */
     private void fastForwardToFortKearny() {
         int fortKearnyDistance = 0;
         String currentLandmark = "";
@@ -400,6 +447,10 @@ public class startGame {
         scanner.nextLine();
     }
 
+    /**
+     * Calculates and processes daily food consumption for the party.
+     * Reduces food supplies and handles consequences of insufficient food.
+     */
     private void consumeDailyFood() {
         // Each person consumes 2 pounds of food per day
         int foodNeeded = 2;
@@ -427,6 +478,10 @@ public class startGame {
         }
     }
 
+    /**
+     * Displays the current status of the journey and party.
+     * Shows health, supplies, distance traveled, and other relevant information.
+     */
     private void displayStatus() {
         System.out.println("\n===== STATUS =====");
         System.out.println("Health: " + player.getHealth() + "/100");
@@ -435,6 +490,11 @@ public class startGame {
         System.out.println("Food: " + inventory.getFoodAmount() + " pounds");
     }
 
+    /**
+     * Gets a numeric choice input from the user with validation.
+     * 
+     * @return The validated numeric choice entered by the user
+     */
     private int getUserChoice() {
         System.out.println("\nWhat would you like to do?");
         System.out.println("1. Continue on the trail");
@@ -458,6 +518,10 @@ public class startGame {
         }
     }
 
+    /**
+     * Checks and reports on the wagon's current condition.
+     * Handles consequences of wagon damage or deterioration.
+     */
     private void checkWagonCondition() {
         if (wagon.getCondition() <= 0) {
             System.out.println("\nYour wagon has completely broken down!");
@@ -471,6 +535,10 @@ public class startGame {
         }
     }
 
+    /**
+     * Displays historical information relevant to the current location or situation.
+     * Provides educational content about the Oregon Trail period.
+     */
     private void displayHistoricalInformation() {
         System.out.println("\n=====================================================");
         System.out.println("              HISTORICAL INFORMATION                ");
@@ -543,6 +611,10 @@ public class startGame {
         scanner.nextLine();
     }
 
+    /**
+     * Provides contextual information specific to reaching Independence Rock.
+     * Includes historical significance and gameplay implications.
+     */
     private void displayIndependenceRockEndingContext() {
         System.out.println("\n=====================================================");
         System.out.println("            INDEPENDENCE ROCK REACHED!              ");
@@ -577,6 +649,12 @@ public class startGame {
         }
     }
 
+    /**
+     * Displays a summary of the journey progress at certain points.
+     * 
+     * @param days Number of days spent on the trail
+     * @param distanceTraveled Total distance covered so far
+     */
     private void displayGameSummary(int days, int distanceTraveled) {
         System.out.println("\n=====================================================");
         System.out.println("                  JOURNEY SUMMARY                    ");
@@ -610,8 +688,11 @@ public class startGame {
         }
     }
 
-    // Add to startGame class
-
+    /**
+     * Displays the final game summary when the journey concludes.
+     * 
+     * @param success Whether the player successfully completed the journey
+     */
     public void displayEndGameSummary(boolean success) {
         System.out.println("\n=====================================================");
         System.out.println("                   JOURNEY COMPLETE                  ");

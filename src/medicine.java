@@ -1,5 +1,23 @@
+/**
+ * Medicine Class of the Perils Along the Platte Game
+ * Represents medical items that can heal players and companions.
+ * Extends the item class with medicine-specific healing abilities.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : medicine.java
+ */
 public class medicine extends item {
     private int healingPower;
+    
+    /**
+     * Constructor for creating a medicine item.
+     * Automatically sets healing power based on medicine type.
+     * 
+     * @param name The name of the medicine
+     * @param quantity The quantity of medicine
+     */
     public medicine(String name, int quantity) {
         super(name, 1, quantity);
 
@@ -11,6 +29,12 @@ public class medicine extends item {
         }
     }
 
+    /**
+     * Uses medicine on a player to restore health.
+     * Displays healing information to the console.
+     * 
+     * @param player The player to heal
+     */
     public void useMedicine(player player) {
         System.out.println("Using " + this.getName() + " on " + player.getName() + ".");
 
@@ -20,18 +44,38 @@ public class medicine extends item {
         System.out.println("New health: " + player.getHealth());
     }
 
+    /**
+     * Gets the healing power of the medicine.
+     * 
+     * @return The healing amount
+     */
     public int getHealingPower() {
         return healingPower;
     }
 
+    /**
+     * Sets the healing power of the medicine.
+     * 
+     * @param healingPower The new healing amount
+     */
     public void setHealingPower(int healingPower) {
         this.healingPower = healingPower;
     }
 
+    /**
+     * Returns a string representation of the medicine.
+     * Includes name, healing power, and quantity.
+     * 
+     * @return A string describing the medicine
+     */
     public String toString() {
         return getName() + " (Healing: " + healingPower + ", Qty: " + getQuantity() + ")";
     }
 
+    /**
+     * Displays historical information about medicine on the Oregon Trail.
+     * Provides educational content about 19th century medical practices.
+     */
     public void displayHistoricalMedicalInfo() {
         System.out.println("\n=====================================================");
         System.out.println("          HISTORICAL MEDICINE ON THE TRAIL           ");
@@ -56,10 +100,22 @@ public class medicine extends item {
         System.out.println("with disease being the most common cause of death.");
     }
 
+    /**
+     * Factory method to create basic medicine items.
+     * 
+     * @param quantity The quantity of medicine to create
+     * @return A new basic medicine item
+     */
     public static medicine createBasicMedicine(int quantity) {
         return new medicine("Basic Medicine", quantity);
     }
 
+    /**
+     * Factory method to create advanced medicine items.
+     * 
+     * @param quantity The quantity of medicine to create
+     * @return A new advanced medicine item
+     */
     public static medicine createAdvancedMedicine(int quantity) {
         return new medicine("Advanced Medicine", quantity);
     }

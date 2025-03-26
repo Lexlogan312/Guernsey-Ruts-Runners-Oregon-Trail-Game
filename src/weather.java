@@ -1,3 +1,13 @@
+/**
+ * Weather Class of the Perils Along the Platte Game
+ * Manages weather conditions and their impact on gameplay.
+ * Handles temperature, precipitation, wind, and seasonal changes.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : weather.java
+ */
 public class weather extends time{
     double temperature;
     double humidity;
@@ -6,12 +16,24 @@ public class weather extends time{
     double precipitationAmount;
     int weatherStrength;
 
+    /**
+     * Constructor for creating a weather object with a specified month.
+     * Initializes weather conditions based on the month.
+     * 
+     * @param month The starting month as a string
+     */
     public weather(String month) {
         super(month);
         weatherStrength = setWeatherStrength();
     }
 
-    //Add more switch statements in this switch statement to create more weather scenarios
+    /**
+     * Updates weather conditions based on the day count and month.
+     * Changes conditions when moving to a new month.
+     * 
+     * @param days The number of days elapsed
+     * @param month The current month
+     */
     public void updateWeather(int days, String month) {
         int monthNumber = Integer.parseInt(month);
         if(days % 31 == 0) monthNumber++;
@@ -25,6 +47,10 @@ public class weather extends time{
         setTime(days, monthNumber);
     }
 
+    /**
+     * Updates weather conditions based on the current month.
+     * Simpler version that doesn't track day count.
+     */
     public void updateWeather(){
         switch(this.getMonth()){
             case 3: findWeatherPossibilityProbability(); setTemperature(temperature+10); setHumidity(); break;
@@ -35,6 +61,12 @@ public class weather extends time{
         }
     }
 
+    /**
+     * Displays current weather conditions and returns the weather strength.
+     * Outputs temperature, humidity, wind speed, and precipitation if present.
+     * 
+     * @return The current weather strength value
+     */
     public int getWeather() {
         System.out.println("The temperature is: " + temperature + " degrees Fahrenheit");
         System.out.println("The humidity is: " + humidity + "%");
@@ -43,46 +75,99 @@ public class weather extends time{
         return weatherStrength;
     }
 
+    /**
+     * Sets the temperature value.
+     * 
+     * @param temperature The temperature in degrees Fahrenheit
+     */
     public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
+    /**
+     * Gets the current temperature.
+     * 
+     * @return The temperature in degrees Fahrenheit
+     */
     public double getTemperature() {
         return temperature;
     }
 
+    /**
+     * Sets a random humidity value between 1 and 50.
+     * 
+     * @return The newly set humidity percentage
+     */
     public double setHumidity() {
         return humidity = Math.random()*50 + 1;
     }
 
+    /**
+     * Gets the current humidity.
+     * 
+     * @return The humidity percentage
+     */
     public double getHumidity() {
         return humidity;
     }
 
+    /**
+     * Sets a random normal wind speed between 1 and 20 mph.
+     */
     public void setWindSpeed() {
         windSpeed = Math.random() * 20 + 1; //mph
     }
 
+    /**
+     * Sets a random heavy wind speed between 10 and 30 mph.
+     */
     public void setHeavyWindSpeed(){
         windSpeed = Math.random() * 20 + 10;
     }
 
+    /**
+     * Gets the current wind speed.
+     * 
+     * @return The wind speed in mph
+     */
     public double getWindSpeed() {
         return windSpeed;
     }
 
+    /**
+     * Calculates a random weather event duration.
+     * 
+     * @return The weather duration value
+     */
     public double getWeatherLength(){
         return Math.random() * 100 + 1;
     }
 
+    /**
+     * Sets a random weather strength value between 1 and 10.
+     * Higher values indicate more severe weather.
+     * 
+     * @return The newly set weather strength
+     */
     public int setWeatherStrength(){
         return weatherStrength = Integer.parseInt(String.valueOf(Math.random() * 10 + 1));
     }
 
+    /**
+     * Calculates the chance of precipitation occurring.
+     * 
+     * @return A value between 1 and 10 representing precipitation chance
+     */
     public double getPrecipitationChance(){
         return Math.random() * 10 + 1;
     }
 
+    /**
+     * Calculates the amount of precipitation based on chance.
+     * Higher chance values result in more precipitation.
+     * 
+     * @return The amount of precipitation in inches
+     */
     public double getPrecipitationAmount(){
         switch((int)getPrecipitationChance()){
             case 0: return Math.random() + 1;
@@ -100,6 +185,10 @@ public class weather extends time{
         }
     }
 
+    /**
+     * Determines the weather conditions based on random chance and weather strength.
+     * Sets appropriate temperature, wind, and precipitation values.
+     */
     public void findWeatherPossibilityProbability(){
         int weatherPossibility = Integer.parseInt(String.valueOf(Math.random()*10+1));
         switch(weatherPossibility){

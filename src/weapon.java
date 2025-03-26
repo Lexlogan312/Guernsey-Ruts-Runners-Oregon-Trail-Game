@@ -1,8 +1,25 @@
+/**
+ * Weapon Class of the Perils Along the Platte Game
+ * Represents weapons that can be used for hunting and protection.
+ * Extends the item class with weapon-specific attributes and behaviors.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : weapon.java
+ */
 public class weapon extends item {
     private int power;
     private int accuracy;
     private int ammo;
 
+    /**
+     * Constructor for creating a weapon with a specified name and power.
+     * Automatically sets power and accuracy based on weapon type.
+     * 
+     * @param name The name of the weapon
+     * @param power The base power value (may be adjusted based on weapon type)
+     */
     public weapon(String name, int power) {
         super(name);
         // Set power and accuracy based on weapon type
@@ -18,42 +35,95 @@ public class weapon extends item {
         }
     }
 
+    /**
+     * Constructor for creating a weapon with specified name, power, and accuracy.
+     * 
+     * @param name The name of the weapon
+     * @param power The power value of the weapon
+     * @param accuracy The accuracy value of the weapon
+     */
     public weapon(String name, int power, int accuracy) {
         super(name);
         this.power = power;
         this.accuracy = accuracy;
     }
 
+    /**
+     * Gets the power value of the weapon.
+     * 
+     * @return The weapon's power
+     */
     public int getPower() {
         return power;
     }
 
+    /**
+     * Sets the power value of the weapon.
+     * 
+     * @param power The power value to set
+     */
     public void setPower(int power) {
         this.power = power;
     }
 
+    /**
+     * Gets the accuracy value of the weapon.
+     * 
+     * @return The weapon's accuracy
+     */
     public int getAccuracy() {
         return accuracy;
     }
 
+    /**
+     * Sets the accuracy value of the weapon.
+     * 
+     * @param accuracy The accuracy value to set
+     */
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
 
+    /**
+     * Simulates shooting the weapon.
+     * Displays information about the weapon being used.
+     * 
+     * @param weapon The weapon being fired
+     */
     public void shoot(weapon weapon) {
         System.out.println("You shoot the " + weapon.getName() + "!");
         System.out.println("Power: " + weapon.getPower());
         System.out.println("Accuracy: " + weapon.getAccuracy());
     }
 
+    /**
+     * Gets the current ammunition count for the weapon.
+     * 
+     * @return The amount of ammunition
+     */
     public int getAmmo() { return ammo;}
 
+    /**
+     * Sets the ammunition count for the weapon.
+     * 
+     * @param ammo The amount of ammunition to set
+     */
     public void setAmmo(int ammo) { this.ammo = ammo;}
 
+    /**
+     * Returns a string representation of the weapon.
+     * Includes name, power, accuracy, and quantity.
+     * 
+     * @return A string describing the weapon
+     */
     public String toString() {
         return getName() + " (Power: " + power + ", Accuracy: " + accuracy + ", Qty: " + getQuantity() + ")";
     }
 
+    /**
+     * Displays historical information about the weapon type.
+     * Provides educational content about firearms and weapons of the Oregon Trail era.
+     */
     public void displayHistoricalInfo() {
         System.out.println("\n=====================================================");
         System.out.println("            HISTORICAL WEAPON INFORMATION            ");
@@ -89,14 +159,32 @@ public class weapon extends item {
         System.out.println("lead and bullet molds, as pre-made ammunition was limited.");
     }
 
+    /**
+     * Factory method to create a hunting rifle.
+     * 
+     * @param quantity The quantity of rifles to create
+     * @return A new hunting rifle weapon
+     */
     public static weapon createHuntingRifle(int quantity) {
         return new weapon("Hunting Rifle", 8, 7);
     }
 
+    /**
+     * Factory method to create a pistol.
+     * 
+     * @param quantity The quantity of pistols to create
+     * @return A new pistol weapon
+     */
     public static weapon createPistol(int quantity) {
         return new weapon("Pistol", 5, 5);
     }
 
+    /**
+     * Factory method to create a knife.
+     * 
+     * @param quantity The quantity of knives to create
+     * @return A new knife weapon
+     */
     public static weapon createKnife(int quantity) {
         return new weapon("Hunting Knife", 3, 9);
     }
