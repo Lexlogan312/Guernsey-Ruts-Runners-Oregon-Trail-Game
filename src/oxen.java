@@ -1,3 +1,13 @@
+/**
+ * Oxen Class of the Perils Along the Platte Game
+ * Represents the draft animals that pull the pioneer wagon.
+ * Manages oxen health, feeding, working, and other related mechanics.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : oxen.java
+ */
 import java.util.Scanner;
 import java.util.Random;
 
@@ -10,7 +20,13 @@ public class oxen {
     private static final Random random = new Random(); // Random object for events (if needed)
     food food;
 
-    // Constructor to initialize oxen with name, health, and cost
+    /**
+     * Constructor for creating a new oxen.
+     * Initializes the oxen with a name, health, and cost.
+     * 
+     * @param name The name of the oxen
+     * @param cost The purchase cost of the oxen
+     */
     public oxen(String name, int cost) {
         this.name = name;
         this.health = 100; // Default health for the ox
@@ -19,12 +35,19 @@ public class oxen {
         this.cost = cost;
     }
 
-    // Method to check if the ox is alive
+    /**
+     * Checks if the oxen is currently alive.
+     * 
+     * @return true if the oxen is alive, false otherwise
+     */
     public boolean isAlive() {
         return isAlive;
     }
 
-    // Method to feed the ox, which restores health
+    /**
+     * Feeds the oxen to restore health.
+     * Only works if the oxen is still alive.
+     */
     public void feed() {
         if (isAlive) {
             int healthRestored = random.nextInt(20) + 10; // Restore a random amount of health
@@ -35,7 +58,10 @@ public class oxen {
         }
     }
 
-    // Method to make the ox "work" and lose some health based on usage
+    /**
+     * Makes the oxen work, causing it to lose health.
+     * If health drops to zero, the oxen dies.
+     */
     public void work() {
         if (isAlive) {
             int damage = random.nextInt(10) + 5; // Oxen take some damage each time they work
@@ -52,7 +78,9 @@ public class oxen {
         }
     }
 
-    // Method to check the ox's health status
+    /**
+     * Displays the current health status of the oxen.
+     */
     public void checkHealth() {
         if (isAlive) {
             System.out.println(name + "'s current health: " + health + "/" + maxHealth);
@@ -61,32 +89,60 @@ public class oxen {
         }
     }
 
-    // Method to "buy" oxen (can be triggered from the main game logic)
+    /**
+     * Simulates the purchase of an oxen.
+     * 
+     * @param cost The amount paid for the oxen
+     */
     public void buyOxen(int cost) {
         System.out.println("You have bought an ox for " + cost + " dollars.");
     }
 
-    // Getter for the ox's cost (useful if you are displaying cost to the player)
+    /**
+     * Gets the purchase cost of the oxen.
+     * 
+     * @return The cost value
+     */
     public int getCost() {
         return cost;
     }
 
-    // Getter for name (optional)
+    /**
+     * Gets the name of the oxen.
+     * 
+     * @return The oxen's name
+     */
     public String getName() {
         return name;
     }
 
-    // Getter for health (useful for other classes to check health)
+    /**
+     * Gets the current health of the oxen.
+     * 
+     * @return The current health value
+     */
     public int getHealth() {
         return health;
     }
 
-    // Optional: Implement a toString() method to display ox details
+    /**
+     * Returns a string representation of the oxen.
+     * Includes name and health status.
+     * 
+     * @return A string describing the oxen
+     */
     @Override
     public String toString() {
         return name + " (Health: " + health + "/" + maxHealth + ")";
     }
 
+    /**
+     * Reduces the oxen's health by the specified amount.
+     * If health drops to zero or below, the oxen dies.
+     * 
+     * @param damage The amount of damage to apply
+     * @return The amount of damage applied
+     */
     public int takeDamage(int damage){
         health -= damage;
         if(health <= 0){
@@ -96,6 +152,11 @@ public class oxen {
         return damage;
     }
 
+    /**
+     * Reduces the food available for the oxen by the specified amount.
+     * 
+     * @param amount The amount of food to consume
+     */
     public void decreaseFood(int amount) {
         if (food != null) {
             food.eat(amount);
@@ -105,6 +166,11 @@ public class oxen {
         }
     }
 
+    /**
+     * Gets the food object associated with this oxen.
+     * 
+     * @return The food object
+     */
     public food getFood(){
         return food;
     }

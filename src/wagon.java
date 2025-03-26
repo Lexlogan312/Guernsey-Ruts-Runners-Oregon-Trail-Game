@@ -1,9 +1,23 @@
+/**
+ * Wagon Class of the Perils Along the Platte Game
+ * Represents the player's wagon with attributes such as condition, capacity, and type.
+ * Manages wagon damage, repairs, and provides historical information about wagon types.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : wagon.java
+ */
 public class wagon {
     private int condition;
     private int capacity;
     private boolean isBroken;
     private String wagonType;
 
+    /**
+     * Default constructor for creating a standard wagon.
+     * Initializes a Conestoga wagon with default values for condition and capacity.
+     */
     public wagon() {
         condition = 100;
         capacity = 2000;
@@ -11,6 +25,12 @@ public class wagon {
         wagonType = "Conestoga";
     }
 
+    /**
+     * Constructor for creating a specific type of wagon.
+     * Sets capacity based on the wagon type selected.
+     * 
+     * @param wagonType The type of wagon ("Conestoga", "Prairie Schooner", or "Farm Wagon")
+     */
     public wagon(String wagonType) {
         this();
         this.wagonType = wagonType;
@@ -24,10 +44,21 @@ public class wagon {
         }
     }
 
+    /**
+     * Gets the current condition of the wagon.
+     * 
+     * @return The wagon condition value (0-100)
+     */
     public int getCondition() {
         return condition;
     }
 
+    /**
+     * Reduces the wagon's condition by the specified amount.
+     * Sets the wagon to broken status if condition reaches zero.
+     * 
+     * @param amount The amount of damage to apply
+     */
     public void damage(int amount) {
         condition -= amount;
         if (condition <= 0) {
@@ -40,6 +71,12 @@ public class wagon {
         }
     }
 
+    /**
+     * Repairs the wagon, increasing its condition by the specified amount.
+     * Caps condition at 100 and restores the wagon from broken status if applicable.
+     * 
+     * @param amount The amount of condition to restore
+     */
     public void repair(int amount) {
         condition += amount;
         if (condition > 100) {
@@ -51,18 +88,37 @@ public class wagon {
         }
     }
 
+    /**
+     * Checks if the wagon is currently broken.
+     * 
+     * @return true if the wagon is broken, false otherwise
+     */
     public boolean isBroken() {
         return isBroken;
     }
 
+    /**
+     * Gets the maximum carrying capacity of the wagon.
+     * 
+     * @return The carrying capacity in pounds
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * Gets the type of wagon.
+     * 
+     * @return The wagon type name
+     */
     public String getWagonType() {
         return wagonType;
     }
 
+    /**
+     * Displays information about the wagon to the player.
+     * Includes type, condition, capacity, and warning messages if needed.
+     */
     public void displayWagonInfo() {
         System.out.println("\n=====================================================");
         System.out.println("                  YOUR WAGON                        ");
@@ -81,6 +137,11 @@ public class wagon {
         System.out.println("\nHistorical Note: " + getWagonHistoricalInfo());
     }
 
+    /**
+     * Provides historical information about the current wagon type.
+     * 
+     * @return A string containing historical context about the wagon type
+     */
     private String getWagonHistoricalInfo() {
         if (wagonType.equals("Conestoga")) {
             return "Conestoga wagons were large, heavy freight wagons developed in Pennsylvania. " +

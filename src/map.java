@@ -1,3 +1,13 @@
+/**
+ * Map Class of the Perils Along the Platte Game
+ * Represents the game world map with landmarks, distances, and trail information.
+ * Manages player position, travel progress, and geographic features along the trail.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : map.java
+ */
 import java.util.*;
 public class map {
     private String trailType;
@@ -10,23 +20,52 @@ public class map {
     private int playerX;
     private int playerY;
 
+    /**
+     * Constructor for the map with initial player coordinates.
+     * 
+     * @param startX The starting X-coordinate for the player
+     * @param startY The starting Y-coordinate for the player
+     */
     public map (int startX, int startY) {
         this.playerX = startX;
         this.playerY = startY;
     }
 
+    /**
+     * Gets the player's current X-coordinate on the map.
+     * 
+     * @return The player's X-coordinate
+     */
     public int getPlayerX() {
         return playerX;
     }
 
+    /**
+     * Gets the player's current Y-coordinate on the map.
+     * 
+     * @return The player's Y-coordinate
+     */
     public int getPlayerY() {
         return playerY;
     }
 
+    /**
+     * Updates the player's position on the map.
+     * 
+     * @param dx The change in X-coordinate
+     * @param dy The change in Y-coordinate
+     */
     public void updatePosition(int dx, int dy){
         playerX += dx;
         playerY += dy;
     }
+    /**
+     * Sets the trail type and starting location for the journey.
+     * Initializes landmarks and distances based on the selected trail.
+     * 
+     * @param trailType The type of trail ("Oregon", "California", or "Mormon")
+     * @param startLocation The starting location name
+     */
     public void setTrail(String trailType, String startLocation) {
         this.trailType = trailType;
         this.startLocation = startLocation;
@@ -45,15 +84,25 @@ public class map {
         }
     }
 
+    /**
+     * Displays the starting point information to the player.
+     */
     public void startingPoint() {
         System.out.println("You are starting your journey at " + startLocation + ".");
     }
 
+    /**
+     * Displays the ending point information to the player.
+     */
     public void endingPoint() {
         System.out.println("Your destination is " + endLocation + ".");
     }
-
+    
     //Change positions of the landmarks later(adjust to proper location on the map
+    /**
+     * Initializes the landmarks for the Oregon Trail.
+     * Creates landmarks with their locations, distances, and descriptions.
+     */
     private void initializeOregonTrail() {
         landmarks = new ArrayList<>();
 
@@ -81,7 +130,12 @@ public class map {
                 "This large granite rock contains thousands of pioneer names carved into its surface. Reaching it means you have successfully completed your journey along the Platte River portion of the Oregon Trail.",
                 false, true));
     }
-    //Change landmark locations to be the proper locations on the map
+    
+    //Change positions of the landmarks later(adjust to proper location on the map
+    /**
+     * Initializes the landmarks for the California Trail.
+     * Creates landmarks with their locations, distances, and descriptions.
+     */
     private void initializeCaliforniaTrail() {
         landmarks = new ArrayList<>();
 
@@ -105,7 +159,12 @@ public class map {
                 "This large granite rock contains thousands of pioneer names carved into its surface. Reaching Independence Rock means you have successfully completed your journey along the Platte River portion of the California Trail.",
                 false, true));
     }
+    
     //Change the landmark locations to be the proper locations on the map
+    /**
+     * Initializes the landmarks for the Mormon Trail.
+     * Creates landmarks with their locations, distances, and descriptions.
+     */
     private void initializeMormonTrail() {
         landmarks = new ArrayList<>();
 
@@ -150,14 +209,29 @@ public class map {
                 false, true));
     }
 
+    /**
+     * Gets the name of the current location.
+     * 
+     * @return The name of the current landmark
+     */
     public String getCurrentLocation() {
         return getCurrentLandmark();
     }
 
+    /**
+     * Gets the total distance traveled so far.
+     * 
+     * @return The current distance traveled in miles
+     */
     public int getCurrentDistanceTraveled(){
         return currentDistanceTraveled;
     }
 
+    /**
+     * Gets the name of the current landmark.
+     * 
+     * @return The name of the current landmark or "Unknown location" if none
+     */
     public String getCurrentLandmark() {
         if (currentLandmarkIndex < landmarks.size()) {
             return landmarks.get(currentLandmarkIndex).getName();
@@ -165,6 +239,11 @@ public class map {
         return "Unknown location";
     }
 
+    /**
+     * Calculates the remaining distance to the final destination.
+     * 
+     * @return The remaining distance in miles
+     */
     public int getRemainingDistance() {
         if (currentLandmarkIndex < landmarks.size()) {
             return totalDistance - landmarks.get(currentLandmarkIndex).getDistance();
@@ -172,24 +251,51 @@ public class map {
         return 0;
     }
 
+    /**
+     * Gets the total distance of the selected trail.
+     * 
+     * @return The total trail distance in miles
+     */
     public int getTotalDistance() {
         return totalDistance;
     }
 
+    /**
+     * Updates the player's location based on distance traveled.
+     * 
+     * @param distanceTraveled The distance traveled to add to current position
+     */
     public void updateLocation(int distanceTraveled) {
         updateLocationToDistance(distanceTraveled);
     }
 
+    /**
+     * Gets the type of trail being traveled.
+     * 
+     * @return The trail type ("Oregon", "California", or "Mormon")
+     */
     public String getTrailType() {
         return trailType;
     }
 
+    /**
+     * Checks if a new landmark has been reached after traveling a distance.
+     * 
+     * @param distanceTraveled The distance traveled
+     * @return true if a new landmark was reached, false otherwise
+     */
     public boolean checkLandmark(int distanceTraveled) {
         int previousIndex = currentLandmarkIndex;
         updateLocationToDistance(distanceTraveled);
         return currentLandmarkIndex > previousIndex;
     }
 
+    /**
+     * Gets the name of the landmark at the specified index.
+     * 
+     * @param index The index of the landmark in the landmarks list
+     * @return The name of the landmark or null if index is invalid
+     */
     public String getLandmarkAtIndex(int index) {
         if (index >= 0 && index < landmarks.size()) {
             return landmarks.get(index).getName();
@@ -197,6 +303,12 @@ public class map {
         return null;
     }
 
+    /**
+     * Gets the distance of the landmark at the specified index.
+     * 
+     * @param index The index of the landmark in the landmarks list
+     * @return The distance of the landmark or -1 if index is invalid
+     */
     public int getLandmarkDistanceAtIndex(int index) {
         if (index >= 0 && index < landmarks.size()) {
             return landmarks.get(index).getDistance();
@@ -204,14 +316,30 @@ public class map {
         return 0;
     }
 
+    /**
+     * Checks if the player has reached the final destination.
+     * 
+     * @return true if the final landmark has been reached, false otherwise
+     */
     public boolean reachedDestination() {
         return currentLandmarkIndex >= totalDistance;
     }
 
+    /**
+     * Gets the total number of landmarks on the current trail.
+     * 
+     * @return The size of the landmarks array
+     */
     public int getLandmarkArraySize() {
         return landmarks.size();
     }
 
+    /**
+     * Updates the player's location to reflect traveling a specified distance.
+     * Updates the current landmark index if new landmarks are reached.
+     * 
+     * @param distanceTraveled The total distance traveled so far
+     */
     public void updateLocationToDistance(int distanceTraveled) {
         int newDistance = currentDistanceTraveled + distanceTraveled;
 
@@ -231,6 +359,11 @@ public class map {
         }
     }
 
+    /**
+     * Calculates the distance to the next landmark from the current position.
+     * 
+     * @return The distance to the next landmark in miles
+     */
     public int getDistanceToNextLandmark() {
         if (currentLandmarkIndex < landmarks.size() - 1) {
             int currentDistance = landmarks.get(currentLandmarkIndex).getDistance();
@@ -240,6 +373,10 @@ public class map {
         return totalDistance - landmarks.get(currentLandmarkIndex).getDistance();
     }
 
+    /**
+     * Displays information about the current landmark to the player.
+     * Includes the landmark name, description, and other relevant details.
+     */
     public void displayLandmarkInformation() {
         if (currentLandmarkIndex < landmarks.size()) {
             landmark current = landmarks.get(currentLandmarkIndex);

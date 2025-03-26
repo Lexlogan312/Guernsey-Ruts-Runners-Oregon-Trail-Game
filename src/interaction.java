@@ -1,12 +1,34 @@
+/**
+ * Interaction Class of the Perils Along the Platte Game
+ * Manages player interactions with NPCs and merchants.
+ * Handles buying, selling, trading, stealing, combat, and dialogue.
+ *
+ * @author : Alex Randall, Chase McCluskey, Painter Drury, and Domenic Pilla
+ * @version : 1.0
+ * @date : 03/25/2025
+ * @file : interaction.java
+ */
 public class interaction {
 
     private player player;
 
+    /**
+     * Constructor for the interaction system.
+     * 
+     * @param player The player who will be interacting with NPCs
+     */
     public interaction(player player) {
         this.player = player;
     }
 
-    // Buy an item from a merchant
+    /**
+     * Allows the player to buy an item from a merchant.
+     * Checks if the player has enough currency before completing the purchase.
+     * 
+     * @param item The item to buy
+     * @param quantity The quantity of the item to buy
+     * @param pricePerItem The price of each individual item
+     */
     public void buy(item item, int quantity, int pricePerItem) {
         int totalCost = pricePerItem * quantity;
 
@@ -19,7 +41,14 @@ public class interaction {
         }
     }
 
-    // Sell an item to a merchant
+    /**
+     * Allows the player to sell an item to a merchant.
+     * Checks if the player has enough of the item before completing the sale.
+     * 
+     * @param item The item to sell
+     * @param quantity The quantity of the item to sell
+     * @param pricePerItem The price merchant will pay for each item
+     */
     public void sell(item item, int quantity, int pricePerItem) {
         if (player.getInventory().hasItem(item.getName()) && player.getInventory().getItemQuantity(item) >= quantity) {
             int totalEarnings = pricePerItem * quantity;
@@ -31,7 +60,15 @@ public class interaction {
         }
     }
 
-    // Trade items with another NPC
+    /**
+     * Allows the player to trade items with an NPC.
+     * Checks if the player has enough of the item before completing the trade.
+     * 
+     * @param playerItem The item the player is giving
+     * @param npcItem The item the player is receiving
+     * @param playerItemQuantity The quantity of the player's item
+     * @param npcItemQuantity The quantity of the NPC's item
+     */
     public void trade(item playerItem, item npcItem, int playerItemQuantity, int npcItemQuantity) {
         // Ensure player has enough of the item
         if (player.getInventory().getItemQuantity(playerItem) >= playerItemQuantity) {
@@ -47,7 +84,12 @@ public class interaction {
         }
     }
 
-    // Steal an item from an NPC
+    /**
+     * Attempts to steal an item from an NPC.
+     * Success is determined by a random chance that could be influenced by player attributes.
+     * 
+     * @param item The item to attempt to steal
+     */
     public void steal(item item) {
         // Check success rate based on player attributes (e.g., a random chance)
         int successChance = 50; // Default success chance (can be increased based on player attributes)
@@ -63,7 +105,12 @@ public class interaction {
         }
     }
 
-    // Attack an NPC
+    /**
+     * Allows the player to attack an NPC.
+     * Damage is calculated based on player's weapon power.
+     * 
+     * @param npc The NPC to attack
+     */
     public void attack(NPC npc) {
         if (npc.getHealth() > 0) {
             int attackPower = player.getWeaponPower(); // Assuming player has weapons
@@ -77,7 +124,12 @@ public class interaction {
         }
     }
 
-    // Talk to an NPC (dialogue or information exchange)
+    /**
+     * Initiates a conversation with an NPC.
+     * May result in random dialogue or trade opportunities.
+     * 
+     * @param npc The NPC to talk to
+     */
     public void talk(NPC npc) {
         // Example of random dialogue or benefits
         String[] dialogues = {
