@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Health Class of the Perils Along the Platte Game
  * Manages health status for players, companions, and animals.

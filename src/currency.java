@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Currency Class of the Perils Along the Platte Game
  * Manages player's money and financial transactions.

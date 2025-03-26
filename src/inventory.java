@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Inventory Class of the Perils Along the Platte Game
  * Manages the collection of items that the player can carry and use.

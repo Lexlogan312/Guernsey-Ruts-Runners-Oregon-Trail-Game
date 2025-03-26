@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Medicine Class of the Perils Along the Platte Game
  * Represents medical items that can heal players and companions.

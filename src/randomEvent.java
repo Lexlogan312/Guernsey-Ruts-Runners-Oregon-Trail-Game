@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * RandomEvent Class of the Perils Along the Platte Game
  * Manages random occurrences that can happen during gameplay.

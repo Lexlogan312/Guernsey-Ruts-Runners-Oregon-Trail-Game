@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Perils Class of the Perils Along the Platte Game
  * Manages various hazards and events that can occur during the journey.

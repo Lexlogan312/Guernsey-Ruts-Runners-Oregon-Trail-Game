@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Landmark Class of the Perils Along the Platte Game
  * Represents significant locations along the trail that players can visit.

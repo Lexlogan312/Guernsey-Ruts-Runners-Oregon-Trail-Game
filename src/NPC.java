@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * NPC Class of the Perils Along the Platte Game
  * Represents non-player characters that players can interact with during the journey.

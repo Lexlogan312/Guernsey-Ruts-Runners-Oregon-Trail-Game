@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * StartGame Class of the Perils Along the Platte Game
  * Controls the initialization, progression, and main gameplay loop of the Oregon Trail-style game.
@@ -8,6 +10,7 @@
  * @date : 03/25/2025
  * @file : startGame.java
  */
+
 import java.util.Scanner;
 
 public class startGame {

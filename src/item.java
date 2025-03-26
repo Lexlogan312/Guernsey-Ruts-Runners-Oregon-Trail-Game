@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Item Class of the Perils Along the Platte Game
  * Base class for all in-game items including food, weapons, tools, and supplies.

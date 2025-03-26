@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * WagonDamage Class of the Perils Along the Platte Game
  * Manages damage events that can occur to the player's wagon.

@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Wagon Class of the Perils Along the Platte Game
  * Represents the player's wagon with attributes such as condition, capacity, and type.

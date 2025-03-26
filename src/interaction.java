@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Interaction Class of the Perils Along the Platte Game
  * Manages player interactions with NPCs and merchants.

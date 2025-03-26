@@ -1,3 +1,5 @@
+package termProject;
+
 /**
  * Food Class of the Perils Along the Platte Game
  * Represents food items that can be consumed by players and animals.
